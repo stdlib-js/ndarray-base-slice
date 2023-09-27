@@ -35,7 +35,7 @@ var numel = require( '@stdlib/ndarray-base-numel' );
 var scalar2ndarray = require( '@stdlib/ndarray-base-from-scalar' );
 var baseCtor = require( '@stdlib/ndarray-base-ctor' );
 var ctor = require( '@stdlib/ndarray-ctor' );
-var slice = require( './../lib' );
+var slice = require( './../../dist' );
 
 
 // TESTS //
