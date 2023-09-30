@@ -71,7 +71,7 @@ The [branches.md][branches-url] file summarizes the available branches and displ
 var slice = require( '@stdlib/ndarray-base-slice' );
 ```
 
-#### slice( x, slice, strict, mutable )
+#### slice( x, slice, strict, writable )
 
 Returns a view of an input ndarray.
 
@@ -115,7 +115,7 @@ The function accepts the following arguments:
 -   **x**: input ndarray.
 -   **slice**: a [`MultiSlice`][@stdlib/slice/multi] instance.
 -   **strict**: boolean indicating whether to enforce strict bounds checking.
--   **mutable**: boolean indicating whether a returned ndarray should be mutable.
+-   **writable**: boolean indicating whether a returned ndarray should be writable.
 
 </section>
 
@@ -124,6 +124,10 @@ The function accepts the following arguments:
 <!-- Package usage notes. Make sure to keep an empty line after the `section` element and another before the `/section` close. -->
 
 <section class="notes">
+
+## Notes
+
+-   The `writable` parameter **only** applies to ndarray constructors supporting **read-only** instances.
 
 </section>
 
