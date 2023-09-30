@@ -1,7 +1,7 @@
 {
   "name": "@stdlib/ndarray-base-slice",
   "version": "0.0.0",
-  "description": "Return a read-only view of an input ndarray.",
+  "description": "Return a view of an input ndarray.",
   "license": "Apache-2.0",
   "author": {
     "name": "The Stdlib Authors",
@@ -38,10 +38,10 @@
   },
   "dependencies": {
     "@stdlib/array-base-take": "^0.1.0",
-    "@stdlib/array-base-zeros": "^0.1.0",
-    "@stdlib/ndarray-base-buffer": "^0.1.0",
+    "@stdlib/array-base-zeros": "^0.1.1",
+    "@stdlib/ndarray-base-buffer": "^0.1.1",
     "@stdlib/ndarray-base-numel": "^0.1.0",
-    "@stdlib/slice-base-nonreduced-dimensions": "github:stdlib-js/slice-base-nonreduced-dimensions#main",
+    "@stdlib/slice-base-nonreduced-dimensions": "^0.1.0",
     "@stdlib/slice-base-normalize-multi-slice": "^0.1.0",
     "@stdlib/slice-base-shape": "^0.1.0",
     "@stdlib/string-format": "^0.1.0",
