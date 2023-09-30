@@ -33,7 +33,7 @@ limitations under the License.
 
 [![NPM version][npm-image]][npm-url] [![Build Status][test-image]][test-url] [![Coverage Status][coverage-image]][coverage-url] <!-- [![dependencies][dependencies-image]][dependencies-url] -->
 
-> Return a read-only view of an input ndarray.
+> Return a view of an input ndarray.
 
 <!-- Section to include introductory text. Make sure to keep an empty line after the intro `section` element and another before the `/section` close. -->
 
@@ -45,43 +45,35 @@ limitations under the License.
 
 <!-- Package usage documentation. -->
 
+<section class="installation">
 
+## Installation
+
+```bash
+npm install @stdlib/ndarray-base-slice
+```
+
+Alternatively,
+
+-   To load the package in a website via a `script` tag without installation and bundlers, use the [ES Module][es-module] available on the [`esm` branch][esm-url].
+-   If you are using Deno, visit the [`deno` branch][deno-url].
+-   For use in Observable, or in browser/node environments, use the [Universal Module Definition (UMD)][umd] build available on the [`umd` branch][umd-url].
+
+The [branches.md][branches-url] file summarizes the available branches and displays a diagram illustrating their relationships.
+
+</section>
 
 <section class="usage">
 
 ## Usage
 
-To use in Observable,
-
 ```javascript
-slice = require( 'https://cdn.jsdelivr.net/gh/stdlib-js/ndarray-base-slice@umd/browser.js' )
+var slice = require( '@stdlib/ndarray-base-slice' );
 ```
 
-To vendor stdlib functionality and avoid installing dependency trees for Node.js, you can use the UMD server build:
+#### slice( x, slice, strict, mutable )
 
-```javascript
-var slice = require( 'path/to/vendor/umd/ndarray-base-slice/index.js' )
-```
-
-To include the bundle in a webpage,
-
-```html
-<script type="text/javascript" src="https://cdn.jsdelivr.net/gh/stdlib-js/ndarray-base-slice@umd/browser.js"></script>
-```
-
-If no recognized module system is present, access bundle contents via the global scope:
-
-```html
-<script type="text/javascript">
-(function () {
-    window.slice;
-})();
-</script>
-```
-
-#### slice( x, slice, strict )
-
-Returns a **read-only** view of an input ndarray.
+Returns a view of an input ndarray.
 
 ```javascript
 var Slice = require( '@stdlib/slice-ctor' );
@@ -108,7 +100,7 @@ var s1 = new Slice( null, null, -1 );
 var s = new MultiSlice( s0, s1 );
 // returns <MultiSlice>
 
-var y = slice( x, s, false );
+var y = slice( x, s, false, false );
 // returns <ndarray>
 
 sh = y.shape;
@@ -123,6 +115,7 @@ The function accepts the following arguments:
 -   **x**: input ndarray.
 -   **slice**: a [`MultiSlice`][@stdlib/slice/multi] instance.
 -   **strict**: boolean indicating whether to enforce strict bounds checking.
+-   **mutable**: boolean indicating whether a returned ndarray should be mutable.
 
 </section>
 
@@ -146,18 +139,13 @@ The function accepts the following arguments:
 
 <!-- eslint-disable new-cap -->
 
-```html
-<!DOCTYPE html>
-<html lang="en">
-<body>
-<script type="text/javascript" src="https://cdn.jsdelivr.net/gh/stdlib-js/slice-ctor@umd/browser.js"></script>
-<script type="text/javascript" src="https://cdn.jsdelivr.net/gh/stdlib-js/slice-multi@umd/browser.js"></script>
-<script type="text/javascript" src="https://cdn.jsdelivr.net/gh/stdlib-js/ndarray-array@umd/browser.js"></script>
-<script type="text/javascript" src="https://cdn.jsdelivr.net/gh/stdlib-js/ndarray-to-array@umd/browser.js"></script>
-<script type="text/javascript" src="https://cdn.jsdelivr.net/gh/stdlib-js/array-base-zero-to@umd/browser.js"></script>
-<script type="text/javascript" src="https://cdn.jsdelivr.net/gh/stdlib-js/ndarray-base-slice@umd/browser.js"></script>
-<script type="text/javascript">
-(function () {
+```javascript
+var S = require( '@stdlib/slice-ctor' );
+var E = require( '@stdlib/slice-multi' );
+var array = require( '@stdlib/ndarray-array' );
+var ndarray2array = require( '@stdlib/ndarray-to-array' );
+var zeroTo = require( '@stdlib/array-base-zero-to' );
+var slice = require( '@stdlib/ndarray-base-slice' );
 
 // Alias `null` to allow for more compact indexing expressions:
 var _ = null;
@@ -172,21 +160,21 @@ var x = array( buf, {
 
 // Get each matrix...
 var s1 = E( 0, _, _ );
-var y1 = slice( x, s1, false );
+var y1 = slice( x, s1, false, false );
 // returns <ndarray>
 
 var a1 = ndarray2array( y1 );
 // returns [ [ 0, 1, 2 ], [ 3, 4, 5 ], [ 6, 7, 8 ] ]
 
 var s2 = E( 1, _, _ );
-var y2 = slice( x, s2, false );
+var y2 = slice( x, s2, false, false );
 // returns <ndarray>
 
 var a2 = ndarray2array( y2 );
 // returns [ [ 9, 10, 11 ], [ 12, 13, 14 ], [ 15, 16, 17 ] ]
 
 var s3 = E( 2, _, _ );
-var y3 = slice( x, s3, false );
+var y3 = slice( x, s3, false, false );
 // returns <ndarray>
 
 var a3 = ndarray2array( y3 );
@@ -195,7 +183,7 @@ var a3 = ndarray2array( y3 );
 // Reverse all elements:
 var s = S( _, _, -1 );
 var s4 = E( s, s, s );
-var y4 = slice( x, s4, false );
+var y4 = slice( x, s4, false, false );
 // returns <ndarray>
 
 var a4 = ndarray2array( y4 );
@@ -203,7 +191,7 @@ var a4 = ndarray2array( y4 );
 
 // Get the second rows from each matrix:
 var s5 = E( _, 1, _ );
-var y5 = slice( x, s5, false );
+var y5 = slice( x, s5, false, false );
 // returns <ndarray>
 
 var a5 = ndarray2array( y5 );
@@ -211,16 +199,11 @@ var a5 = ndarray2array( y5 );
 
 // Get the second columns from each matrix:
 var s6 = E( _, _, 1 );
-var y6 = slice( x, s6, false );
+var y6 = slice( x, s6, false, false );
 // returns <ndarray>
 
 var a6 = ndarray2array( y6 );
 // returns [ [ 1, 4, 7 ], [ 10, 13, 16 ], [ 19, 22, 25 ] ]
-
-})();
-</script>
-</body>
-</html>
 ```
 
 </section>
@@ -312,7 +295,7 @@ Copyright &copy; 2016-2023. The Stdlib [Authors][stdlib-authors].
 
 [stdlib-license]: https://raw.githubusercontent.com/stdlib-js/ndarray-base-slice/main/LICENSE
 
-[@stdlib/slice/multi]: https://github.com/stdlib-js/stdlib/tree/umd
+[@stdlib/slice/multi]: https://github.com/stdlib-js/stdlib
 
 </section>
 
