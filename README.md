@@ -33,7 +33,7 @@ limitations under the License.
 
 [![NPM version][npm-image]][npm-url] [![Build Status][test-image]][test-url] [![Coverage Status][coverage-image]][coverage-url] <!-- [![dependencies][dependencies-image]][dependencies-url] -->
 
-> Return a read-only view of an input ndarray.
+> Return a view of an input ndarray.
 
 <!-- Section to include introductory text. Make sure to keep an empty line after the intro `section` element and another before the `/section` close. -->
 
@@ -45,25 +45,41 @@ limitations under the License.
 
 <!-- Package usage documentation. -->
 
+<section class="installation">
 
+## Installation
+
+```bash
+npm install @stdlib/ndarray-base-slice
+```
+
+Alternatively,
+
+-   To load the package in a website via a `script` tag without installation and bundlers, use the [ES Module][es-module] available on the [`esm` branch][esm-url].
+-   If you are using Deno, visit the [`deno` branch][deno-url].
+-   For use in Observable, or in browser/node environments, use the [Universal Module Definition (UMD)][umd] build available on the [`umd` branch][umd-url].
+
+The [branches.md][branches-url] file summarizes the available branches and displays a diagram illustrating their relationships.
+
+</section>
 
 <section class="usage">
 
 ## Usage
 
 ```javascript
-import slice from 'https://cdn.jsdelivr.net/gh/stdlib-js/ndarray-base-slice@esm/index.mjs';
+var slice = require( '@stdlib/ndarray-base-slice' );
 ```
 
-#### slice( x, slice, strict )
+#### slice( x, slice, strict, mutable )
 
-Returns a **read-only** view of an input ndarray.
+Returns a view of an input ndarray.
 
 ```javascript
-import Slice from 'https://cdn.jsdelivr.net/gh/stdlib-js/slice-ctor@esm/index.mjs';
-import MultiSlice from 'https://cdn.jsdelivr.net/gh/stdlib-js/slice-multi@esm/index.mjs';
-import ndarray from 'https://cdn.jsdelivr.net/gh/stdlib-js/ndarray-ctor@esm/index.mjs';
-import ndarray2array from 'https://cdn.jsdelivr.net/gh/stdlib-js/ndarray-to-array@esm/index.mjs';
+var Slice = require( '@stdlib/slice-ctor' );
+var MultiSlice = require( '@stdlib/slice-multi' );
+var ndarray = require( '@stdlib/ndarray-ctor' );
+var ndarray2array = require( '@stdlib/ndarray-to-array' );
 
 var buffer = [ 1.0, 2.0, 3.0, 4.0, 5.0, 6.0 ];
 var shape = [ 3, 2 ];
@@ -84,7 +100,7 @@ var s1 = new Slice( null, null, -1 );
 var s = new MultiSlice( s0, s1 );
 // returns <MultiSlice>
 
-var y = slice( x, s, false );
+var y = slice( x, s, false, false );
 // returns <ndarray>
 
 sh = y.shape;
@@ -99,6 +115,7 @@ The function accepts the following arguments:
 -   **x**: input ndarray.
 -   **slice**: a [`MultiSlice`][@stdlib/slice/multi] instance.
 -   **strict**: boolean indicating whether to enforce strict bounds checking.
+-   **mutable**: boolean indicating whether a returned ndarray should be mutable.
 
 </section>
 
@@ -122,18 +139,13 @@ The function accepts the following arguments:
 
 <!-- eslint-disable new-cap -->
 
-```html
-<!DOCTYPE html>
-<html lang="en">
-<body>
-<script type="module">
-
-import S from 'https://cdn.jsdelivr.net/gh/stdlib-js/slice-ctor@esm/index.mjs';
-import E from 'https://cdn.jsdelivr.net/gh/stdlib-js/slice-multi@esm/index.mjs';
-import array from 'https://cdn.jsdelivr.net/gh/stdlib-js/ndarray-array@esm/index.mjs';
-import ndarray2array from 'https://cdn.jsdelivr.net/gh/stdlib-js/ndarray-to-array@esm/index.mjs';
-import zeroTo from 'https://cdn.jsdelivr.net/gh/stdlib-js/array-base-zero-to@esm/index.mjs';
-import slice from 'https://cdn.jsdelivr.net/gh/stdlib-js/ndarray-base-slice@esm/index.mjs';
+```javascript
+var S = require( '@stdlib/slice-ctor' );
+var E = require( '@stdlib/slice-multi' );
+var array = require( '@stdlib/ndarray-array' );
+var ndarray2array = require( '@stdlib/ndarray-to-array' );
+var zeroTo = require( '@stdlib/array-base-zero-to' );
+var slice = require( '@stdlib/ndarray-base-slice' );
 
 // Alias `null` to allow for more compact indexing expressions:
 var _ = null;
@@ -148,21 +160,21 @@ var x = array( buf, {
 
 // Get each matrix...
 var s1 = E( 0, _, _ );
-var y1 = slice( x, s1, false );
+var y1 = slice( x, s1, false, false );
 // returns <ndarray>
 
 var a1 = ndarray2array( y1 );
 // returns [ [ 0, 1, 2 ], [ 3, 4, 5 ], [ 6, 7, 8 ] ]
 
 var s2 = E( 1, _, _ );
-var y2 = slice( x, s2, false );
+var y2 = slice( x, s2, false, false );
 // returns <ndarray>
 
 var a2 = ndarray2array( y2 );
 // returns [ [ 9, 10, 11 ], [ 12, 13, 14 ], [ 15, 16, 17 ] ]
 
 var s3 = E( 2, _, _ );
-var y3 = slice( x, s3, false );
+var y3 = slice( x, s3, false, false );
 // returns <ndarray>
 
 var a3 = ndarray2array( y3 );
@@ -171,7 +183,7 @@ var a3 = ndarray2array( y3 );
 // Reverse all elements:
 var s = S( _, _, -1 );
 var s4 = E( s, s, s );
-var y4 = slice( x, s4, false );
+var y4 = slice( x, s4, false, false );
 // returns <ndarray>
 
 var a4 = ndarray2array( y4 );
@@ -179,7 +191,7 @@ var a4 = ndarray2array( y4 );
 
 // Get the second rows from each matrix:
 var s5 = E( _, 1, _ );
-var y5 = slice( x, s5, false );
+var y5 = slice( x, s5, false, false );
 // returns <ndarray>
 
 var a5 = ndarray2array( y5 );
@@ -187,15 +199,11 @@ var a5 = ndarray2array( y5 );
 
 // Get the second columns from each matrix:
 var s6 = E( _, _, 1 );
-var y6 = slice( x, s6, false );
+var y6 = slice( x, s6, false, false );
 // returns <ndarray>
 
 var a6 = ndarray2array( y6 );
 // returns [ [ 1, 4, 7 ], [ 10, 13, 16 ], [ 19, 22, 25 ] ]
-
-</script>
-</body>
-</html>
 ```
 
 </section>
@@ -227,7 +235,7 @@ var a6 = ndarray2array( y6 );
 
 ## Notice
 
-This package is part of [stdlib][stdlib], a standard library with an emphasis on numerical and scientific computing. The library provides a collection of robust, high performance libraries for mathematics, statistics, streams, utilities, and more.
+This package is part of [stdlib][stdlib], a standard library for JavaScript and Node.js, with an emphasis on numerical and scientific computing. The library provides a collection of robust, high performance libraries for mathematics, statistics, streams, utilities, and more.
 
 For more information on the project, filing bug reports and feature requests, and guidance on how to develop [stdlib][stdlib], see the main project [repository][stdlib].
 
@@ -287,7 +295,7 @@ Copyright &copy; 2016-2023. The Stdlib [Authors][stdlib-authors].
 
 [stdlib-license]: https://raw.githubusercontent.com/stdlib-js/ndarray-base-slice/main/LICENSE
 
-[@stdlib/slice/multi]: https://github.com/stdlib-js/stdlib/tree/esm
+[@stdlib/slice/multi]: https://github.com/stdlib-js/stdlib
 
 </section>
 
