@@ -299,7 +299,7 @@ Copyright &copy; 2016-2023. The Stdlib [Authors][stdlib-authors].
 
 [stdlib-license]: https://raw.githubusercontent.com/stdlib-js/ndarray-base-slice/main/LICENSE
 
-[@stdlib/slice/multi]: https://github.com/stdlib-js/stdlib
+[@stdlib/slice/multi]: https://github.com/stdlib-js/slice-multi
 
 </section>
 
