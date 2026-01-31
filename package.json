@@ -48,7 +48,7 @@
     "@stdlib/ndarray-base-shape": "^0.2.2",
     "@stdlib/ndarray-base-strides": "^0.2.2",
     "@stdlib/slice-base-nonreduced-dimensions": "^0.2.2",
-    "@stdlib/slice-base-normalize-multi-slice": "^0.2.2",
+    "@stdlib/slice-base-normalize-multi-slice": "^0.2.3",
     "@stdlib/slice-base-shape": "^0.2.2",
     "@stdlib/string-format": "^0.2.2",
     "@stdlib/types": "^0.4.3",
@@ -56,7 +56,7 @@
   },
   "devDependencies": {
     "@stdlib/array-base-zero-to": "^0.2.1",
-    "@stdlib/array-typed": "^0.3.0",
+    "@stdlib/array-typed": "^0.3.1",
     "@stdlib/assert-is-ndarray-like": "^0.2.2",
     "@stdlib/ndarray-array": "^0.2.1",
     "@stdlib/ndarray-base-assert-is-read-only": "^0.2.2",
