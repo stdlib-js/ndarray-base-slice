@@ -52,6 +52,11 @@ limitations under the License.
 ## Usage
 
 ```javascript
+import slice from 'https://cdn.jsdelivr.net/gh/stdlib-js/ndarray-base-slice@esm/index.mjs';
+```
+The previous example will load the latest bundled code from the esm branch. Alternatively, you may load a specific version by loading the file from one of the [tagged bundles](https://github.com/stdlib-js/ndarray-base-slice/tags). For example,
+
+```javascript
 import slice from 'https://cdn.jsdelivr.net/gh/stdlib-js/ndarray-base-slice@v0.2.3-esm/index.mjs';
 ```
 
@@ -138,7 +143,7 @@ import E from 'https://cdn.jsdelivr.net/gh/stdlib-js/slice-multi@esm/index.mjs';
 import array from 'https://cdn.jsdelivr.net/gh/stdlib-js/ndarray-array@esm/index.mjs';
 import ndarray2array from 'https://cdn.jsdelivr.net/gh/stdlib-js/ndarray-to-array@esm/index.mjs';
 import zeroTo from 'https://cdn.jsdelivr.net/gh/stdlib-js/array-base-zero-to@esm/index.mjs';
-import slice from 'https://cdn.jsdelivr.net/gh/stdlib-js/ndarray-base-slice@v0.2.3-esm/index.mjs';
+import slice from 'https://cdn.jsdelivr.net/gh/stdlib-js/ndarray-base-slice@esm/index.mjs';
 
 // Alias `null` to allow for more compact indexing expressions:
 var _ = null;
